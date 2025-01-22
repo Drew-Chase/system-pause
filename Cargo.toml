@@ -2,10 +2,18 @@
 name = "system-pause"
 version = "0.1.0"
 edition = "2021"
-
-[dependencies]
+description = "`system-pause` is a Rust library for stopping program execution temporarily. It offers simple macros for pausing the console, either waiting for user input or pausing with a countdown timer. This is useful for debugging or interactive console applications."
+repository = "https://github.com/Drew-Chase/system-pause.git"
 
 
 [[example]]
 name = "basic"
 path = "examples/basic.rs"
+
+[[example]]
+name="with_message"
+path="examples/with_message.rs"
+
+[[example]]
+name="with_timer"
+path = "examples/with_timer.rs"

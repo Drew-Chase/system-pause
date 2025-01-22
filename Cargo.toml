@@ -1,0 +1,11 @@
+[package]
+name = "system-pause"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+
+[[example]]
+name = "basic"
+path = "examples/basic.rs"

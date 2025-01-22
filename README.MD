@@ -109,13 +109,8 @@ fn main() {
 ```
 
 
-Console output
-```text
-> Timer pause!
-> Please press Enter to proceed...
- 
-> Resumed.
-```
+Console output   
+![pause-timer.gif](pause-timer.gif)
 
 
 ---

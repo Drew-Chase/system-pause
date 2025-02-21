@@ -10,8 +10,17 @@
 #[macro_export]
 macro_rules! pause {
     () => {
-        use system_pause::pause_with_message;
-        pause_with_message!("Press Enter to continue..."); // Calls the `pause_with_message!` macro with a default message.
+        {
+            pause!("Press Enter to continue..."); // Calls the `pause_with_message!` macro with a default message.
+        }
+    };
+
+    ($msg:expr) => {
+        {
+            println!($msg); // Prints the custom pause message.
+            let mut input = String::new();
+            std::io::stdin().read_line(&mut input).unwrap(); // Waits for user input (Enter key) to continue.
+        }
     };
 }
 
@@ -27,12 +36,15 @@ macro_rules! pause {
 /// ```no-rust
 /// pause_with_message!("Custom pause message...");
 /// ```
+#[deprecated(since = "0.1.1", note = "Use `pause!` instead.")]
 #[macro_export]
 macro_rules! pause_with_message {
     ($msg:expr) => {
-        println!($msg); // Prints the custom pause message.
-        let mut input = String::new();
-        std::io::stdin().read_line(&mut input).unwrap(); // Waits for user input (Enter key) to continue.
+        {
+            println!($msg); // Prints the custom pause message.
+            let mut input = String::new();
+            std::io::stdin().read_line(&mut input).unwrap(); // Waits for user input (Enter key) to continue.
+        }
     };
 }
 
@@ -50,19 +62,45 @@ macro_rules! pause_with_message {
 /// ```
 #[macro_export]
 macro_rules! pause_for_time {
+    // Pattern for just seconds parameter
     ($seconds:expr) => {
-        use std::io::Write; // Required for flushing the output stream.
-        let mut time_remaining = $seconds; // Initializes the countdown timer.
-        while time_remaining > 0 { // Continues until the timer reaches 0.
-            print!(
-                "\r{}\rWait {}s to continue...",
-                " ".repeat(27), // Clears the previous line by overwriting it with spaces.
-                time_remaining // Displays the remaining time.
-            );
-            std::io::stdout().flush().unwrap(); // Ensures the output is displayed immediately.
-            std::thread::sleep(std::time::Duration::from_secs(1)); // Waits for 1 second.
-            time_remaining -= 1; // Decrements the countdown.
-        }
-        println!(); // Adds a new line after the countdown is complete.
+        pause_for_time!($seconds, "Wait {}s to continue...") // Default message
     };
+
+    // Pattern for both seconds and message parameters
+    ($seconds:expr, $message:expr) => {{
+        use std::io::Write;
+        let message_length: usize = $message.len();
+        let mut time_remaining = $seconds;
+        let mut clear_line = false;
+        while time_remaining >= 0 {
+            print!(
+                "\r{}\r{}",
+                " ".repeat(message_length + 5),
+                format!($message, time_remaining)
+            );
+            std::io::stdout().flush().unwrap();
+            std::thread::sleep(std::time::Duration::from_secs(1));
+            time_remaining -= 1;
+        }
+
+        let system_pause_options = std::env::var("SYSTEM_PAUSE");
+        if let Ok(options_list) = system_pause_options {
+            let options = options_list.split(',');
+            for option in options {
+                let key_value: Vec<&str> = option.split('=').collect();
+                let key = key_value[0];
+                let value = key_value[1];
+                if key == "CLEAR_TIMER_LINE" && value == "true" {
+                    clear_line = true;
+                }
+            }
+        }
+        if clear_line {
+            print!("\r{}\r", " ".repeat(message_length + 5));
+            std::io::stdout().flush().unwrap();
+        } else {
+            println!();
+        }
+    }};
 }

@@ -6,5 +6,7 @@ fn main() {
 	// During the pause, the remaining time is updated on the same console line.
 	// Note: This is blocks the current thread, use accordingly.
 	pause_for_time!(5);
+	std::env::set_var("SYSTEM_PAUSE", "CLEAR_TIMER_LINE=false");
+	pause_for_time!(5, "This line should be cleared after {} seconds.");
 	println!("Goodbye, world!");
 }

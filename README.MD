@@ -16,7 +16,7 @@ Add `system-pause` to your `Cargo.toml` as follows:
 
 ```toml
 [dependencies]
-system-pause = "0.1.1" # Or what ever the latest version is.
+system-pause = "0.1.2" # Or what ever the latest version is.
 ```
 
 or install via github

@@ -1,4 +1,3 @@
-
 # system-pause
 
 `system-pause` is a Rust library for stopping program execution temporarily. It offers simple macros for pausing the console, either waiting for user input or pausing with a countdown timer. This is useful for debugging or interactive console applications.
@@ -17,7 +16,7 @@ Add `system-pause` to your `Cargo.toml` as follows:
 
 ```toml
 [dependencies]
-system-pause = "0.1.0" # Or what ever the latest version is.
+system-pause = "0.1.1" # Or what ever the latest version is.
 ```
 
 or install via github
@@ -29,7 +28,7 @@ system-pause = {git="https://github.com/Drew-Chase/system-pause.git"}
 Then, include it in your Rust code using:
 
 ```rust
-use system_pause::{pause, pause_with_message, pause_for_time};
+use system_pause::{pause, pause_for_time};
 ```
 
 ---
@@ -61,24 +60,17 @@ Console output
 > Continuing...
 ```
 
----
-
-### 2. `pause_with_message!(<message>)`
-
-Pauses the program and allows you to specify a custom message to display.
-
-#### Example:
+You can also specify a custom message:
 
 ```rust
-use system_pause::pause_with_message;
+use system_pause::pause;
 
 fn main() {
     println!("Custom pause!");
-    pause_with_message!("Please press Enter to proceed...");
+    pause!("Please press Enter to proceed..."); // Custom message
     println!("Resumed.");
 }
 ```
-
 
 Console output
 ```text
@@ -90,7 +82,7 @@ Console output
 
 ---
 
-### 3. `pause_for_time!(<seconds>)`
+### 2. `pause_for_time!(<seconds>)`
 
 Pauses the program for a given number of seconds and provides a real-time countdown on the console.
 
@@ -103,15 +95,13 @@ use system_pause::pause_for_time;
 
 fn main() {
     println!("Timer pause!");
-    pause_for_time!(5); // Pauses for 5 seconds
+    pause_for_time!(5, "This line should be cleared after {} seconds."); // Pauses for 5 seconds
     println!("5 seconds have passed.");
 }
 ```
 
-
 Console output   
 ![pause-timer.gif](pause-timer.gif)
-
 
 ---
 
@@ -132,11 +122,11 @@ fn main() {
 **Custom Message Example**:
 
 ```rust
-use system_pause::pause_with_message;
+use system_pause::pause;
 
 fn main() {
     println!("Hello, world!");
-    pause_with_message!("Please press Enter to continue...");
+    pause!("Please press Enter to continue...");
     println!("Goodbye, world!");
 }
 ```
@@ -152,6 +142,7 @@ fn main() {
     println!("Goodbye, world!");
 }
 ```
+For more information please see the [examples](/examples) directory
 
 ---
 
@@ -164,4 +155,3 @@ fn main() {
 ## License
 
 This project is licensed under the GPL-3.0 License. See the [LICENSE](LICENSE) file for details.
-

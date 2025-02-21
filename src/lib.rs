@@ -1,11 +1,20 @@
 /// Macro: `pause!`
 ///
-/// Pauses the program execution and prompts the user with a default message.
-/// The program will wait until the user presses the Enter key.
+/// Pauses the program execution and prompts the user with a default message
+/// or a custom message provided as an argument. The program will wait until
+/// the user presses the Enter key.
 ///
-/// Example:
-/// ```no-rust
-/// pause!();
+/// # Usage
+/// - `pause!();` - Displays the default message: "Press Enter to continue...".
+/// - `pause!("Your custom message");` - Displays a custom message.
+///
+/// # Arguments
+/// * Optional: `$msg` - The message to display before pausing.
+///
+/// # Example
+/// ```norust
+/// pause!(); // Default message
+/// pause!("Custom message..."); // Custom message
 /// ```
 #[macro_export]
 macro_rules! pause {
@@ -32,8 +41,11 @@ macro_rules! pause {
 /// # Arguments
 /// * `$msg`: The custom message to display before pausing.
 ///
-/// Example:
-/// ```no-rust
+/// # Deprecated
+/// This macro has been deprecated since version `0.1.1`. Use `pause!` instead.
+///
+/// # Example
+/// ```norust
 /// pause_with_message!("Custom pause message...");
 /// ```
 #[deprecated(since = "0.1.1", note = "Use `pause!` instead.")]
@@ -53,12 +65,22 @@ macro_rules! pause_with_message {
 /// Pauses the program execution for a specified number of seconds and displays a countdown.
 /// During the pause, the remaining time is updated on the same console line.
 ///
+/// # Usage
+/// - `pause_for_time!(seconds);` - Displays a countdown with the default message.
+/// - `pause_for_time!(seconds, "Custom message {}s");` - Displays a countdown with a custom message.
+///
 /// # Arguments
 /// * `$seconds`: The total number of seconds to wait.
+/// * Optional: `$message`: A custom message to display with a placeholder for the countdown.
 ///
-/// Example:
-/// ```no-rust
-/// pause_for_time!(5); // Pauses for 5 seconds and shows a countdown.
+/// # Environment Variables
+/// The behavior can be influenced by the `SYSTEM_PAUSE` environment variable:
+/// - `CLEAR_TIMER_LINE=true`: Clears the countdown line after completion.
+///
+/// # Example
+/// ```norust
+/// pause_for_time!(5); // Pauses for 5 seconds with a default message.
+/// pause_for_time!(5, "Custom pause for {} seconds"); // Custom message.
 /// ```
 #[macro_export]
 macro_rules! pause_for_time {

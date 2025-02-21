@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="RemoteTargetsManager">
+    <targets>
+      <target name="WSL - Ubuntu-22.04" type="wsl" uuid="1f09a0fe-a346-48b4-8c9e-72778edd26df">
+        <config>
+          <option name="distributionMsId" value="Ubuntu-22.04" />
+          <option name="projectRootOnTarget" value="{exitCode=0, timeout=false, cancelled=false, stdout=/tmp/tmp.XjtU5aF6RC&#10;, stderr=}/system-pause" />
+        </config>
+        <ContributedStateBase type="RsLanguageRuntime">
+          <config>
+            <option name="cargoPath" value="/home/drew/.cargo/bin/cargo" />
+            <option name="cargoVersion" value="1.83.0 (5ffbef321 2024-10-29)" />
+            <option name="rustcPath" value="/home/drew/.cargo/bin/rustc" />
+            <option name="rustcVersion" value="1.83.0 (90b35a623 2024-11-26)" />
+          </config>
+        </ContributedStateBase>
+      </target>
+    </targets>
+  </component>
+</project>

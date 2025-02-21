@@ -1,6 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="With Timer" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
     <option name="buildProfileId" value="dev" />
+    <target name="@@@LOCAL@@@" />
     <option name="command" value="run --example with_timer" />
     <option name="workingDirectory" value="file://$PROJECT_DIR$" />
     <envs />
